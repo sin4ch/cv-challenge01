@@ -6,15 +6,18 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/latest/postgres
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    #environment:
+        #POSTGRES_DB: ${POSTGRES_DB}
+        #POSTGRES_USER: ${POSTGRES_USER}
+        #POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - app-network
 
   fastapi-backend:
-    build: ./fastapi-backend:v1
+    build: ./backend
+    container-name: fastapi-backend
     ports: 
       - "8000:8000"
     networks:
@@ -23,9 +26,10 @@ services:
       - postgres
 
   react-frontend:
-    build: ./react-frontend:v4
+    build: ./frontend
+    container-name: react-frontend
     ports: 
-      - "80:80"`
+      - "5173:5173"`
     networks:
       - app-network
 
@@ -43,6 +47,7 @@ services:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager:latest
     ports:
+      - "80:80"
       - "81:81"
       - "443:443"
     volumes:
