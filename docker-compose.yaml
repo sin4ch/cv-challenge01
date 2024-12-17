@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image:
+    container-name:
+    ports: 
+    volume:
+    environment:
+      DATABASE_NAME:
+      DATABASE_PASSWORD:
+      DATABASE_
+
+  fastapi-backend:
+    build: ./fastapi-backend
+    port: 8000:8000
+    depends-on:
+
+  react-frontend:
+    build: ./react-frontend:
+    port: 80:80
+
+  adminer:
+    image: adminer
+    container-name: adminer
+    port: 8080:8080
+
+
