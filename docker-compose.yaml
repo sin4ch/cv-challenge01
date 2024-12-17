@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     container-name: postgresql
     ports: 
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/latest/postgres
     environment:
@@ -16,7 +16,7 @@ services:
   fastapi-backend:
     build: ./fastapi-backend:v1
     ports: 
-      - 8000:8000
+      - "8000:8000"
     networks:
       - app-network
     depends-on:
@@ -25,7 +25,7 @@ services:
   react-frontend:
     build: ./react-frontend:v4
     ports: 
-      - 80:80
+      - "80:80"`
     networks:
       - app-network
 
@@ -35,9 +35,21 @@ services:
     networks:
       - app-network
     ports: 
-      - 8080:8080
+      - "8080:8080"
     environment:
       POSTGRES_SERVER: ${POSTGRES_SERVER}
+        
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager:latest
+    ports:
+      - "81:81"
+      - "443:443"
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - app-network
 
 volumes:
   pgdata:
