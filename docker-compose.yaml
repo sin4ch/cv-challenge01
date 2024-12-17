@@ -6,12 +6,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/latest/postgres
-    env_file:
-      - ./backend/.env
-    #environment:
-     #POSTGRES_DB: ${POSTGRES_DB}
-     #POSTGRES_USER: ${POSTGRES_USER}
-     #POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        #env_file:
+        #- .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - app-network
 
@@ -40,10 +40,10 @@ services:
       - app-network
     ports: 
       - "8080:8080"
-    env_file:
-      - ./backend/.env
-      #environment:
-        #POSTGRES_SERVER: ${POSTGRES_SERVER}
+        #env_file:
+        # - .env
+    environment:
+      POSTGRES_SERVER: ${POSTGRES_SERVER}
         
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
