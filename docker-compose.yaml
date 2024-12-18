@@ -14,7 +14,9 @@ services:
       - app-network
 
   fastapi-backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile  
     container_name: fastapi-backend
     ports: 
       - "8000:8000"
@@ -26,7 +28,9 @@ services:
       - postgres
 
   react-frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile  
     container_name: react-frontend
     ports: 
       - "5173:5173"

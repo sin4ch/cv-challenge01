@@ -7,4 +7,4 @@ RUN poetry install
 COPY . /app
 ENV PYTHONPATH=/app:$PYTHONPATH  
 EXPOSE 8000
-CMD ["bash", "-c", "poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --reload --host 0.0.0.0"]
+CMD ["sh", "-c", "poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --reload --host=0.0.0.0"]
